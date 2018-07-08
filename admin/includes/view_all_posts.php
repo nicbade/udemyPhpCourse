@@ -1,21 +1,54 @@
+<?php
+
+    if(isset($_POST['checkBoxArray'])) {
+
+        foreach($_POST['checkBoxArray'] as $checkBoxValue) {
+            
+            $bulk_options = $_POST['bulk_options'];
+
+        }
+    }
+
+?>
+
+
+
+
+
+<form action="" method="post">
 <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Post Id</th>
-                                <th>Author</th>
-                                <th>Title</th>
-                                <th>Category</th>
-                                <th>Status</th>
-                                <th>Image</th>
-                                <th>Tags</th>
-                                <th>Comments</th>
-                                <th>Date</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
+<div class="col-xs-4" id="bulkOptionsContainer">
+
+    <select name="bulk_options" id="" class="form-control">
+        <option value="">Select Options</option>
+        <option value="">Publish</option>
+        <option value="">Draft</option>
+        <option value="">Delete</option>
+    </select>
+</div>
+<div class="col-xs-4">
+    <input type="submit" class="btn btn-success" name="submit" value="Apply">
+    <a href="add_post.php" class="btn btn-primary">Add New</a>
+</div>
+
+    <thead>
+        <tr>
+            <th><input type="checkbox" id="selectAllBoxes"></th>
+            <th>Post Id</th>
+            <th>Author</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Image</th>
+            <th>Tags</th>
+            <th>Comments</th>
+            <th>Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
 
 <?php 
     $query = "SELECT * FROM posts";
@@ -34,6 +67,11 @@
         // $post_content =$row['post_content'];
 
         echo "<tr>";
+?>
+
+<td><input type="checkbox" class="checkBoxes" id="selectAllBoxes" name="checkBoxArray[]" value="<?php echo $post_id; ?>"></td>;
+
+<?php
         echo "<td>{$post_id}</td>";
         echo "<td>{$post_author}</td>";
         echo "<td>{$post_title}</td>";
@@ -63,7 +101,7 @@
 ?>
     </tbody>
 </table>
-
+</form>
 <?php 
 if(isset($_GET['delete'])) {
     $the_post_id = $_GET['delete'];
